@@ -3,6 +3,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+#update with your email and password.
 MY_ADDRESS = 'you_email_address'
 PASSWORD = 'your_password'
 
@@ -27,7 +28,7 @@ def main():
     names, emails = get_contacts('contacts.txt')
     message_template = read_template('message.txt')
 
-    # set up SMTP server
+    # set up SMTP server. Use different host and port if not using gmail.
     s = smtplib.SMTP(host='smtp.gmail.com', port='587')
     s.starttls()
     s.login(MY_ADDRESS, PASSWORD)
@@ -38,7 +39,7 @@ def main():
         print(message)
         msg['From'] = MY_ADDRESS
         msg['To'] = email
-        msg['Subject'] = "Strengthen Our Community"
+        msg['Subject'] = "some_subject here"  #customize subject.
         msg.attach(MIMEText(message, 'plain'))
         s.send_message(msg)
         del msg
